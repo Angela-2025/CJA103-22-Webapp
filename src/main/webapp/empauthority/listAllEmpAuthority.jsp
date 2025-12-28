@@ -29,14 +29,14 @@
             <td>${auth.functionId}</td>
             <td>
                 <!-- 查單筆 -->
-                <form action="EmpAuthorityServlet" method="post" style="display:inline;">
+                <form action="empauthority.do" method="post" style="display:inline;">
                     <input type="hidden" name="action" value="getOne"/>
                     <input type="hidden" name="empId" value="${auth.empId}"/>
                     <input type="hidden" name="functionId" value="${auth.functionId}"/>
                     <input type="submit" value="查詢"/>
                 </form>
                 <!-- 刪除 -->
-                <form action="EmpAuthorityServlet" method="post" style="display:inline;">
+                <form action="empauthority.do" method="post" style="display:inline;">
                     <input type="hidden" name="action" value="delete"/>
                     <input type="hidden" name="empId" value="${auth.empId}"/>
                     <input type="hidden" name="functionId" value="${auth.functionId}"/>
@@ -48,7 +48,9 @@
 </table>
 
 <!-- 新增連結 (透過 Servlet 進入) -->
-<p><a href="EmpAuthorityServlet?action=insertForm">新增權限</a></p>
+<p>
+    <a href="${pageContext.request.contextPath}/empauthority.do?action=insertForm">新增權限</a>
+</p>
 
 </body>
 </html>

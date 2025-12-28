@@ -16,7 +16,7 @@
     </ul>
 </c:if>
 
-<form action="<c:url value='EmpAuthorityServlet'/>" method="post">
+<form action="<c:url value='empauthority.do'/>" method="post">
     <input type="hidden" name="action" value="insert"/>
     <table>
         <tr>
@@ -31,6 +31,6 @@
     <input type="submit" value="新增"/>
 </form>
 
-<p><a href="<c:url value='EmpAuthorityServlet?action=getAll'/>">回權限清單</a></p>
+<p><a href="<c:url value='empauthority.do?action=getAll'/>">回權限清單</a></p>
 </body>
 </html>

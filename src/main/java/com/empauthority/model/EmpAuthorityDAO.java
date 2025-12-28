@@ -1,12 +1,7 @@
 package com.empauthority.model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.sql.*;
+import java.util.*;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -78,6 +73,8 @@ public class EmpAuthorityDAO implements EmpAuthorityDAO_interface {
 	@Override
 	public List<EmpAuthorityVO> getAll() {
 		List<EmpAuthorityVO> list = new ArrayList<>();
+		String sql = "SELECT emp_id, function_id FROM emp_authority";
+		
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(GET_ALL_STMT);
 				ResultSet rs = pstmt.executeQuery()) {

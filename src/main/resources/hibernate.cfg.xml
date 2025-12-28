@@ -10,6 +10,6 @@
 		
 		<property name="hibernate.current_session_context_class">thread</property>
 		
-		<mapping class="idv.david.book.entity.Book"/>
+		
 	</session-factory>
 </hibernate-configuration>

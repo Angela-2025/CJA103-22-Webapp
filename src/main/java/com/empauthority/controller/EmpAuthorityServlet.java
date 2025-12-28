@@ -19,8 +19,8 @@ public class EmpAuthorityServlet extends HttpServlet {
 
 		/*************** 顯示新增表單 ***************/
 		if ("insertForm".equals(action)) {
-		    RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/empauthority/addEmpAuthority.jsp");
-		    dispatcher.forward(req, res);
+			RequestDispatcher dispatcher = req.getRequestDispatcher("/empauthority/addEmpAuthority.jsp");
+			dispatcher.forward(req, res);
 		}
 
 		/*************** 新增 ***************/
@@ -36,15 +36,19 @@ public class EmpAuthorityServlet extends HttpServlet {
 				EmpAuthorityService authSvc = new EmpAuthorityService();
 				authSvc.addEmpAuthority(empId, functionId);
 
-				// 3. 成功 forward
-				String url = "/WEB-INF/empauthority/listAllEmpAuthority.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);
+				// 3. 再查全部資料
+				List<EmpAuthorityVO> list = authSvc.getAll();
+				req.setAttribute("empAuthorityList", list);
+
+				// 4. forward 到 JSP
+				RequestDispatcher successView = req
+						.getRequestDispatcher("/empauthority/listAllEmpAuthority.jsp");
 				successView.forward(req, res);
 
 			} catch (Exception e) {
 				errorMsgs.add("新增失敗： " + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/WEB-INF/empauthority/listAllEmpAuthority.jsp");
+						.getRequestDispatcher("/empauthority/listAllEmpAuthority.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -63,56 +67,58 @@ public class EmpAuthorityServlet extends HttpServlet {
 				EmpAuthorityService authSvc = new EmpAuthorityService();
 				authSvc.deleteEmpAuthority(empId, functionId);
 
-				// 3. 成功 forward
-				String url = "/WEB-INF/empauthority/listAllEmpAuthority.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);
+				// 再查全部 
+				List<EmpAuthorityVO> list = authSvc.getAll();
+				req.setAttribute("empAuthorityList", list); 
+				// forward 
+				RequestDispatcher successView = req.getRequestDispatcher("/empauthority/listAllEmpAuthority.jsp");
 				successView.forward(req, res);
 
 			} catch (Exception e) {
 				errorMsgs.add("刪除失敗：" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/WEB-INF/empauthority/listAllEmpAuthority.jsp");
+						.getRequestDispatcher("/empauthority/listAllEmpAuthority.jsp");
 				failureView.forward(req, res);
 			}
 		}
 
 		/*************** 查單筆 ***************/
-		if ("getOne".equals(action)) {
-			List<String> errorMsgs = new LinkedList<>();
-			req.setAttribute("errorMsgs", errorMsgs);
+		if ("getOne_For_Display".equals(action)) {
+		    List<String> errorMsgs = new LinkedList<>();
+		    req.setAttribute("errorMsgs", errorMsgs);
 
-			try {
-				// 1. 接收參數
-				Integer empId = Integer.valueOf(req.getParameter("empId"));
-				Integer functionId = Integer.valueOf(req.getParameter("functionId"));
+		    try {
+		        Integer empId = Integer.valueOf(req.getParameter("empId"));
+		        Integer functionId = Integer.valueOf(req.getParameter("functionId"));
 
-				// 2. 呼叫 Service
-				EmpAuthorityService authSvc = new EmpAuthorityService();
-				EmpAuthorityVO vo = authSvc.getOneEmpAuthority(empId, functionId);
+		        EmpAuthorityService authSvc = new EmpAuthorityService();
+		        EmpAuthorityVO vo = authSvc.getOneEmpAuthority(empId, functionId);
 
-				if (vo == null) {
-					throw new Exception("查無資料");
-				}
+		        if (vo == null) {
+		            throw new Exception("查無資料");
+		        }
 
-				// 3. 成功 forward
-				req.setAttribute("empAuthorityVO", vo);
-				String url = "/WEB-INF/empauthority/listOneEmpAuthority.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);
-				successView.forward(req, res);
+		        req.setAttribute("empAuthorityVO", vo);
+		        RequestDispatcher successView = req.getRequestDispatcher("/empauthority/listOneEmpAuthority.jsp");
+		        successView.forward(req, res);
 
-			} catch (Exception e) {
-				req.setAttribute("errorMsgs", List.of("查詢失敗： " + e.getLocalizedMessage()));
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/WEB-INF/empauthority/listOneEmpAuthority.jsp");
-				failureView.forward(req, res);
-			}
+		    } catch (Exception e) {
+		        errorMsgs.add("查詢失敗：" + e.getMessage());
+		        RequestDispatcher failureView = req.getRequestDispatcher("/empauthority/selectEmpAuthority.jsp");
+		        failureView.forward(req, res);
+		    }
 		}
 
 		/*************** 顯示選單頁 ***************/
 		if ("selectPage".equals(action)) {
-			RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/empauthority/selectEmpAuthority.jsp");
-			dispatcher.forward(req, res);
+		    EmpAuthorityService authSvc = new EmpAuthorityService();
+		    List<EmpAuthorityVO> list = authSvc.getAll();
+		    req.setAttribute("empAuthorityList", list);
+
+		    RequestDispatcher dispatcher = req.getRequestDispatcher("/empauthority/selectEmpAuthority.jsp");
+		    dispatcher.forward(req, res);
 		}
+
 
 		/*************** 查全部 ***************/
 		if ("getAll".equals(action)) {
@@ -123,15 +129,15 @@ public class EmpAuthorityServlet extends HttpServlet {
 				EmpAuthorityService authSvc = new EmpAuthorityService();
 				req.setAttribute("empAuthorityList", authSvc.getAll());
 
-				String url = "/WEB-INF/empauthority/listAllEmpAuthority.jsp";
+				String url = "/empauthority/listAllEmpAuthority.jsp";
 				RequestDispatcher successView = req
-						.getRequestDispatcher("/WEB-INF/empauthority/listAllEmpAuthority.jsp");
+						.getRequestDispatcher("/empauthority/listAllEmpAuthority.jsp");
 				successView.forward(req, res);
 
 			} catch (Exception e) {
 				errorMsgs.add("查詢全部失敗：" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/WEB-INF/empauthority/listAllEmpAuthority.jsp");
+						.getRequestDispatcher("/empauthority/listAllEmpAuthority.jsp");
 				failureView.forward(req, res);
 
 			}

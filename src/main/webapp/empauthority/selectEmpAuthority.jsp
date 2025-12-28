@@ -48,11 +48,11 @@
 </c:if>
 
 <ul>
-  <li><a href="<c:url value='EmpAuthorityServlet?action=getAll'/>">List</a> all EmpAuthorities.<br><br></li>
+  <li><a href="<c:url value='empauthority.do?action=getAll'/>">List</a> all EmpAuthorities.<br><br></li>
 
   <li>
-    <form method="post" action="EmpAuthorityServlet">
-      <b>輸入員工編號:</b>
+    <form method="post" action="empauthority.do">
+      <b>後台管理員編號:</b>
       <input type="text" name="empId">
       <input type="hidden" name="action" value="getOne_For_Display">
       <input type="submit" value="送出">
@@ -60,8 +60,8 @@
   </li>
 
   <li>
-    <form method="post" action="EmpAuthorityServlet">
-      <b>選擇員工編號:</b>
+    <form method="post" action="empauthority.do">
+      <b>選擇管理員編號:</b>
       <select size="1" name="empId">
         <c:forEach var="empAuthVO" items="${empAuthorityList}">
           <option value="${empAuthVO.empId}">${empAuthVO.empId}</option>
@@ -73,7 +73,7 @@
   </li>
 
   <li>
-    <form method="post" action="EmpAuthorityServlet">
+    <form method="post" action="empauthority.do">
       <b>選擇功能編號:</b>
       <select size="1" name="functionId">
         <c:forEach var="empAuthVO" items="${empAuthorityList}">
@@ -88,7 +88,7 @@
 
 <h3>權限管理</h3>
 <ul>
-  <li><a href="<c:url value='EmpAuthorityServlet?action=insertForm'/>">Add</a> a new EmpAuthority.</li>
+  <li><a href="<c:url value='addEmpAuthority.jsp'/>">Add</a> a new EmpAuthority.</li>
 </ul>
 
 </body>
