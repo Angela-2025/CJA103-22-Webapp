@@ -6,9 +6,12 @@ public class EmpAuthorityService {
 	
 	private EmpAuthorityDAO_interface dao;
 	
+	
 	public EmpAuthorityService() {
-		dao = new EmpAuthorityDAO();	
+	    // 改用 JDBCDAO (如果不打算配置 JNDI)
+	    dao = new EmpAuthorityJDBCDAO(); 
 	}
+	
 	public void addEmpAuthority(Integer empId, Integer functionId) {
 		EmpAuthorityVO vo = new EmpAuthorityVO();
 		vo.setEmpId(empId);

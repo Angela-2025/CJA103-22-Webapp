@@ -50,6 +50,9 @@
 <ul>
   <li><a href="<c:url value='empauthority.do?action=getAll'/>">List</a> all EmpAuthorities.<br><br></li>
 
+  <%-- 
+     註解掉：因為這是複合主鍵表，Servlet 需要同時接收 empId 與 functionId。
+     單獨輸入 empId 會導致 Servlet 拋出例外。
   <li>
     <form method="post" action="empauthority.do">
       <b>後台管理員編號:</b>
@@ -58,30 +61,28 @@
       <input type="submit" value="送出">
     </form>
   </li>
+  --%>
 
   <li>
     <form method="post" action="empauthority.do">
-      <b>選擇管理員編號:</b>
+      <b>選擇權限查詢 (下拉選單):</b><br>
+      
+      員工編號: 
       <select size="1" name="empId">
-        <c:forEach var="empAuthVO" items="${empAuthorityList}">
-          <option value="${empAuthVO.empId}">${empAuthVO.empId}</option>
-        </c:forEach>
+         <c:forEach var="empAuthVO" items="${empAuthorityList}">
+             <option value="${empAuthVO.empId}">${empAuthVO.empId}</option>
+         </c:forEach>
       </select>
-      <input type="hidden" name="action" value="getOne_For_Display">
-      <input type="submit" value="送出">
-    </form>
-  </li>
-
-  <li>
-    <form method="post" action="empauthority.do">
-      <b>選擇功能編號:</b>
+      
+      功能編號: 
       <select size="1" name="functionId">
-        <c:forEach var="empAuthVO" items="${empAuthorityList}">
-          <option value="${empAuthVO.functionId}">${empAuthVO.functionId}</option>
-        </c:forEach>
+         <c:forEach var="empAuthVO" items="${empAuthorityList}">
+             <option value="${empAuthVO.functionId}">${empAuthVO.functionId}</option>
+         </c:forEach>
       </select>
+
       <input type="hidden" name="action" value="getOne_For_Display">
-      <input type="submit" value="送出">
+      <input type="submit" value="查詢">
     </form>
   </li>
 </ul>

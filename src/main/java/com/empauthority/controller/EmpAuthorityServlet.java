@@ -41,9 +41,9 @@ public class EmpAuthorityServlet extends HttpServlet {
 				req.setAttribute("empAuthorityList", list);
 
 				// 4. forward 到 JSP
-				RequestDispatcher successView = req
-						.getRequestDispatcher("/empauthority/listAllEmpAuthority.jsp");
-				successView.forward(req, res);
+				String contextPath = req.getContextPath();
+				res.sendRedirect(contextPath + "/empauthority/empauthority.do?action=getAll");
+				return;
 
 			} catch (Exception e) {
 				errorMsgs.add("新增失敗： " + e.getMessage());
@@ -71,8 +71,9 @@ public class EmpAuthorityServlet extends HttpServlet {
 				List<EmpAuthorityVO> list = authSvc.getAll();
 				req.setAttribute("empAuthorityList", list); 
 				// forward 
-				RequestDispatcher successView = req.getRequestDispatcher("/empauthority/listAllEmpAuthority.jsp");
-				successView.forward(req, res);
+				String contextPath = req.getContextPath();
+				res.sendRedirect(contextPath + "/empauthority/empauthority.do?action=getAll");
+				return;
 
 			} catch (Exception e) {
 				errorMsgs.add("刪除失敗：" + e.getMessage());
@@ -113,7 +114,7 @@ public class EmpAuthorityServlet extends HttpServlet {
 		if ("selectPage".equals(action)) {
 		    EmpAuthorityService authSvc = new EmpAuthorityService();
 		    List<EmpAuthorityVO> list = authSvc.getAll();
-		    req.setAttribute("empAuthorityList", list);
+		    req.setAttribute("empAuthorityList", list); // 存入資料供下拉選單使用
 
 		    RequestDispatcher dispatcher = req.getRequestDispatcher("/empauthority/selectEmpAuthority.jsp");
 		    dispatcher.forward(req, res);
