@@ -88,7 +88,7 @@ public class EmpServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 			
 				/***************************1.接收請求參數****************************************/
-				Integer empno = Integer.valueOf(req.getParameter("empId"));
+				Integer empId = Integer.valueOf(req.getParameter("empId"));
 				
 				/***************************2.開始查詢資料****************************************/
 				EmpService empSvc = new EmpService();

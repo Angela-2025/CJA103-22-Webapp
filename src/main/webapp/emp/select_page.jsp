@@ -66,7 +66,7 @@
      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" >
        <b>選擇後台管理員編號:</b>
        <select size="1" name="empId">
-         <c:forEach var="empId" items="${empSvc.all}" > 
+         <c:forEach var="empVO" items="${empSvc.all}" > 
           <option value="${empVO.empId}">${empVO.empId}
          </c:forEach>   
        </select>
