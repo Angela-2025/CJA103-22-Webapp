@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
-  version="6.0"
-  metadata-complete="false">
-	<display-name>CJA103G02</display-name>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="https://jakarta.ee/xml/ns/jakartaee"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+	id="WebApp_ID" version="6.0">
+	<display-name>CJA103G02_22</display-name>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>
@@ -13,22 +12,13 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
-	<resource-ref>
-		<description>DB Connection</description>
-		<res-ref-name>jdbc/TestDB2</res-ref-name>
-		<res-type>javax.sql.DataSource</res-type>
-		<res-auth>Container</res-auth>
-	</resource-ref>
-    <!-- EmpAuthorityServlet 的宣告 -->
-    <servlet>
-        <servlet-name>EmpAuthorityServlet</servlet-name>
-        <servlet-class>com.empauthority.controller.EmpAuthorityServlet</servlet-class>
-    </servlet>
-
-    <!-- EmpAuthorityServlet 的 URL 對應 -->
-    <servlet-mapping>
-        <servlet-name>EmpAuthorityServlet</servlet-name>
-        <url-pattern>/empauthority/empauthority.do</url-pattern>
-    </servlet-mapping>
+	<servlet>
+		<servlet-name>EmpServlet</servlet-name>
+		<servlet-class>com.emp.controller.EmpServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmpServlet</servlet-name>
+		<url-pattern>/emp/emp.do</url-pattern>
+	</servlet-mapping>
 
 </web-app>
