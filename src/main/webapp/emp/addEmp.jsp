@@ -74,11 +74,11 @@
 	</tr>
 	<tr>
 		<td>帳號:</td>
-		<td><input type="TEXT" name="Account"   value="<%= (empVO==null)? "peter111" : empVO.getAccount()%>" size="45"/></td>
+		<td><input type="TEXT" name="account"   value="<%= (empVO==null)? "peter111" : empVO.getAccount()%>" size="45"/></td>
 	</tr>
 	<tr>
 		<td>密碼:</td>
-		<td><input type="password" name="Password"   value="<%= (empVO==null)? "123456" : empVO.getPassword()%>" size="45"/></td>
+		<td><input type="password" name="password"   value="<%= (empVO==null)? "123456" : empVO.getPassword()%>" size="45"/></td>
 	</tr>
 	<tr>
 		<td>狀態:<font color=red><b>*</b></font></td>
